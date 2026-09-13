@@ -97,7 +97,7 @@ npm install
 npm run dev
 ```
 
-브라우저에서 [http://localhost:4173](http://localhost:4173)을 엽니다. 다른 개발 서버로 잘못 연결되지 않도록 CUSTOM EFFECT 전용 개발 포트를 `4173`으로 고정하고, 이미 사용 중이면 자동으로 다른 포트로 이동하지 않고 오류를 표시하도록 설정했습니다. API가 없으면 상단 카탈로그 배지가 `DEMO DATA`로 표시되고, 주문은 `demo-...` ID로 시뮬레이션됩니다. 시각·장바구니·404 흐름은 모두 동작합니다.
+브라우저에서 [http://localhost:8083](http://localhost:8083)을 엽니다. 다른 개발 서버로 잘못 연결되지 않도록 CUSTOM EFFECT 전용 개발 포트를 `8083`으로 고정하고, 이미 사용 중이면 자동으로 다른 포트로 이동하지 않고 오류를 표시하도록 설정했습니다. API가 없으면 상단 카탈로그 배지가 `DEMO DATA`로 표시되고, 주문은 `demo-...` ID로 시뮬레이션됩니다. 시각·장바구니·404 흐름은 모두 동작합니다.
 
 인트로를 다시 보려면 브라우저 개발자 도구의 Session Storage에서 `effect-ops-intro`를 지우거나 새 시크릿 창을 사용하세요.
 
@@ -134,20 +134,20 @@ cd server
 mvn spring-boot:run
 ```
 
-기본 프로필은 인메모리 H2와 `MESSAGING_ENABLED=false`를 사용하므로 PostgreSQL·RabbitMQ 없이 시작됩니다. API는 `http://localhost:8083`에서 시작하며, 프론트 개발 서버는 `/api`를 이 주소로 프록시합니다.
+기본 프로필은 인메모리 H2와 `MESSAGING_ENABLED=false`를 사용하므로 PostgreSQL·RabbitMQ 없이 시작됩니다. API는 `http://localhost:8080`에서 시작하며, 브라우저용 개발 서버는 `http://localhost:8083`에서 `/api` 요청을 API로 프록시합니다.
 
 ## API 사용 예시
 
 카탈로그:
 
 ```bash
-curl http://localhost:8083/api/products
+curl http://localhost:8080/api/products
 ```
 
 주문 생성:
 
 ```bash
-curl -i http://localhost:8083/api/orders \
+curl -i http://localhost:8080/api/orders \
   -X POST \
   -H 'Content-Type: application/json' \
   -H 'Idempotency-Key: portfolio-demo-001' \
