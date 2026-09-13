@@ -1,7 +1,6 @@
-# EFFECT/OPS
+# CUSTOM EFFECT
 
-> **Design the delight. Engineer the recovery.**  
-> 몰입형 인터랙션, 신뢰할 수 있는 주문 처리, 이벤트 기반 아키텍처, 의도적인 장애 복구 경험을 하나로 묶은 풀스택 포트폴리오 프로젝트입니다.
+> `custom-cursor`, `404-error-page`, `aks-store` 세 프로젝트를 하나의 주문 흐름으로 통합한 김태영의 풀스택 포트폴리오 프로젝트입니다.
 
 [![CI](https://github.com/taeyoungk-dev/custom_effect/actions/workflows/ci.yml/badge.svg)](https://github.com/taeyoungk-dev/custom_effect/actions/workflows/ci.yml)
 
@@ -9,7 +8,7 @@
 
 기존 세 프로젝트는 각각 강점이 분명했습니다.
 
-| 원본 프로젝트 | 가져온 핵심 | EFFECT/OPS에서의 확장 |
+| 원본 프로젝트 | 가져온 핵심 | CUSTOM EFFECT에서의 확장 |
 |---|---|---|
 | [`custom-cursor`](https://github.com/taeyoungk-dev/custom-cursor) | 커스텀 커서, 홀드 인터랙션, 패럴랙스, 포스터 아트 | `requestAnimationFrame` 기반 포인터 렌더링, 키보드 진입, reduced-motion 대응, 실제 상품 카탈로그 |
 | [`404-error-page`](https://github.com/taeyoungk-dev/404-error-page) | UFO SVG와 404 애니메이션 | SPA 라우팅, 복구 CTA, 추적 ID, 접근 가능한 오류 상태 화면 |
@@ -110,7 +109,7 @@ npm install
 npm run dev
 ```
 
-브라우저에서 [http://localhost:4173](http://localhost:4173)을 엽니다. 다른 개발 서버로 잘못 연결되지 않도록 EFFECT/OPS 전용 개발 포트를 `4173`으로 고정하고, 이미 사용 중이면 자동으로 다른 포트로 이동하지 않고 오류를 표시하도록 설정했습니다. API가 없으면 상단 카탈로그 배지가 `DEMO DATA`로 표시되고, 주문은 `demo-...` ID로 시뮬레이션됩니다. 시각·장바구니·404 흐름은 모두 동작합니다.
+브라우저에서 [http://localhost:4173](http://localhost:4173)을 엽니다. 다른 개발 서버로 잘못 연결되지 않도록 CUSTOM EFFECT 전용 개발 포트를 `4173`으로 고정하고, 이미 사용 중이면 자동으로 다른 포트로 이동하지 않고 오류를 표시하도록 설정했습니다. API가 없으면 상단 카탈로그 배지가 `DEMO DATA`로 표시되고, 주문은 `demo-...` ID로 시뮬레이션됩니다. 시각·장바구니·404 흐름은 모두 동작합니다.
 
 인트로를 다시 보려면 브라우저 개발자 도구의 Session Storage에서 `effect-ops-intro`를 지우거나 새 시크릿 창을 사용하세요.
 
@@ -126,7 +125,7 @@ docker compose up --build
 
 | 서비스 | 주소 |
 |---|---|
-| EFFECT/OPS 웹 | [http://localhost:8088](http://localhost:8088) |
+| CUSTOM EFFECT 웹 | [http://localhost:8088](http://localhost:8088) |
 | API health | [http://localhost:8088/actuator/health](http://localhost:8088/actuator/health) |
 | RabbitMQ 관리 UI | [http://localhost:15672](http://localhost:15672) |
 

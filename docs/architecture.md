@@ -1,4 +1,4 @@
-# EFFECT/OPS Architecture Notes
+# CUSTOM EFFECT Architecture Notes
 
 이 문서는 README보다 한 단계 깊게, 구현이 해결하려는 실패 모드와 의도적으로 남긴 경계를 기록합니다.
 
@@ -6,7 +6,7 @@
 
 사용자에게 즉시 확정해야 하는 최소 상태는 “유효한 상품으로 주문이 접수되었다”입니다. 알림, 분석, fulfillment 같은 후속 작업까지 HTTP 요청 안에 묶으면 한 downstream 장애가 전체 주문 실패로 전파됩니다.
 
-EFFECT/OPS는 주문과 `order.created` outbox row를 하나의 PostgreSQL transaction으로 저장한 뒤 응답합니다. relay는 별도 주기로 미발행 row를 RabbitMQ에 보냅니다.
+CUSTOM EFFECT는 주문과 `order.created` outbox row를 하나의 PostgreSQL transaction으로 저장한 뒤 응답합니다. relay는 별도 주기로 미발행 row를 RabbitMQ에 보냅니다.
 
 ### 보장하는 것
 
@@ -64,4 +64,3 @@ Kubernetes 사양에 PostgreSQL을 넣지 않은 이유는 운영 데이터의 b
 - RabbitMQ queue depth, unacked, consumer rate
 
 SLO 예시는 “주문 API p95 < 250ms, 월 가용성 99.9%, 정상 broker 상태에서 outbox age < 10s”입니다. 이 수치는 현재 측정 결과가 아니라 향후 부하 테스트에서 검증할 설계 목표입니다.
-

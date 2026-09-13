@@ -90,10 +90,10 @@ function Intro({ onComplete }: { onComplete: () => void }) {
   const stop = () => { pressing.current = false }
 
   return (
-    <div className="intro" role="dialog" aria-label="EFFECT OPS 시작 화면">
-      <span className="intro__index mono">SYS.INIT / 001</span>
+    <div className="intro" role="dialog" aria-label="CUSTOM EFFECT 시작 화면">
+      <span className="intro__index mono">CUSTOM_EFFECT / 2026</span>
       <div className="intro__center">
-        <p className="eyebrow eyebrow--light"><span />Interaction meets infrastructure</p>
+        <p className="eyebrow eyebrow--light"><span />세 개의 프로젝트, 하나의 흐름</p>
         <button
           className="launch-button"
           style={{ '--progress': `${progress * 3.6}deg` } as React.CSSProperties}
@@ -104,11 +104,11 @@ function Intro({ onComplete }: { onComplete: () => void }) {
           onKeyUp={stop}
           aria-label="길게 눌러 프로젝트 시작"
         >
-          <span className="launch-button__core"><small>{Math.round(progress)}%</small>HOLD<br />TO ENTER</span>
+          <span className="launch-button__core"><small>{Math.round(progress)}%</small>길게 눌러<br />시작</span>
         </button>
         <p className="intro__hint mono">PRESS &amp; HOLD · 약 1초</p>
       </div>
-      <button className="intro__skip mono" onClick={onComplete}>SKIP INTRO ↗</button>
+      <button className="intro__skip mono" onClick={onComplete}>바로 보기 ↗</button>
     </div>
   )
 }
@@ -117,14 +117,14 @@ function Header({ cartCount, onCart }: { cartCount: number; onCart: () => void }
   return (
     <header className="site-header">
       <button className="brand" onClick={() => navigate('/')} aria-label="홈으로 이동">
-        <span className="brand__mark">E/</span><span>EFFECT<sup>OPS</sup></span>
+        <span className="brand__mark">C/E</span><span>CUSTOM<sup>EFFECT</sup></span>
       </button>
       <nav aria-label="주요 메뉴">
-        <a href="#collection">Collection</a>
-        <a href="#system">System</a>
-        <a href="#about">About</a>
+        <a href="#collection">상품 데모</a>
+        <a href="#system">처리 흐름</a>
+        <a href="#about">404 화면</a>
       </nav>
-      <button className="cart-button" onClick={onCart}>CART <span>{String(cartCount).padStart(2, '0')}</span></button>
+      <button className="cart-button" onClick={onCart}>장바구니 <span>{String(cartCount).padStart(2, '0')}</span></button>
     </header>
   )
 }
@@ -145,27 +145,27 @@ function Hero() {
   return (
     <main className="hero">
       <div className="hero__copy">
-        <p className="eyebrow"><span />Resilient commerce · Seoul, KR</p>
-        <h1>Design the <em>delight.</em><br />Engineer the <strong>recovery.</strong></h1>
-        <p className="hero__lede">감각적인 인터랙션 뒤에서 주문 데이터가 안전하게 흐르고, 장애 순간에도 사용자가 길을 잃지 않는 커머스 시스템.</p>
+        <p className="eyebrow"><span />김태영 · FULL-STACK PORTFOLIO</p>
+        <h1>세 개의 프로젝트를<br /><em>하나의 흐름으로</em><br /><strong>다시 만들었습니다.</strong></h1>
+        <p className="hero__lede">커스텀 커서, UFO 404, AKS Store 실습을 합쳤습니다. 상품을 고르고 주문하면 Java API가 저장하고 RabbitMQ로 이벤트를 넘깁니다.</p>
         <div className="hero__actions">
-          <a className="button button--dark" href="#collection">Explore the store <span>↘</span></a>
-          <button className="text-link" onClick={() => navigate('/signal-lost')}>Experience failure mode <span>↗</span></button>
+          <a className="button button--dark" href="#collection">상품 데모 보기 <span>↘</span></a>
+          <button className="text-link" onClick={() => navigate('/signal-lost')}>404 화면 보기 <span>↗</span></button>
         </div>
         <dl className="hero__metrics">
-          <div><dt>03</dt><dd>source projects<br />integrated</dd></div>
-          <div><dt>01</dt><dd>transactional<br />event pipeline</dd></div>
-          <div><dt>250<span>ms</span></dt><dd>API latency<br />design SLO</dd></div>
+          <div><dt>03</dt><dd>원본 프로젝트<br />통합</dd></div>
+          <div><dt>05</dt><dd>자동화 테스트<br />통과</dd></div>
+          <div><dt>01</dt><dd>주문 이벤트<br />파이프라인</dd></div>
         </dl>
       </div>
       <div className="hero__visual" ref={visual} onPointerMove={onMove}>
         <div className="visual-grid" />
-        <div className="orbit orbit--outer"><span>EVENT</span></div>
+        <div className="orbit orbit--outer"><span>ORDER → EVENT</span></div>
         <div className="orbit orbit--inner" />
         <img src="/assets/cube.png" alt="반투명 3D 큐브" className="hero__cube" />
-        <div className="visual-card visual-card--top mono"><i /> API / HEALTHY</div>
-        <div className="visual-card visual-card--bottom"><span className="mono">ORDER.QUEUED</span><strong>01</strong></div>
-        <p className="visual-caption mono">POINTER-DRIVEN<br />RAF / 60 FPS</p>
+        <div className="visual-card visual-card--top mono"><i /> FRONT / REACT</div>
+        <div className="visual-card visual-card--bottom"><span className="mono">BACK / JAVA</span><strong>21</strong></div>
+        <p className="visual-caption mono">CURSOR / CSS<br />404 / SVG</p>
       </div>
     </main>
   )
@@ -191,10 +191,10 @@ function Collection({ products, live, onAdd }: { products: Product[]; live: bool
   return (
     <section className="collection section" id="collection">
       <div className="section-heading">
-        <div><p className="section-index mono">01 / STOREFRONT</p><h2>Objects with<br /><em>a signal.</em></h2></div>
+        <div><p className="section-index mono">01 / 상품 데모</p><h2>포스터 이미지를<br /><em>상품 데이터로.</em></h2></div>
         <div className="section-heading__aside">
           <span className={`mode-badge ${live ? 'is-live' : ''}`}><i />{live ? 'LIVE API' : 'DEMO DATA'}</span>
-          <p>원본 포스터 아트를 실제 상품 카탈로그로 재해석했습니다. 가격과 합계는 API가 다시 계산해 클라이언트 조작을 신뢰하지 않습니다.</p>
+          <p>custom-cursor 프로젝트의 포스터 세 장을 상품 카탈로그로 구성했습니다. 주문 금액은 화면 값이 아니라 API가 데이터베이스 가격으로 다시 계산합니다.</p>
         </div>
       </div>
       <div className="product-grid">
@@ -209,9 +209,9 @@ function SystemSection({ status }: { status: PlatformStatus | null }) {
   return (
     <section className="system section" id="system">
       <div className="system__title">
-        <p className="section-index mono">02 / UNDER THE SURFACE</p>
-        <h2>One click.<br /><em>Four boundaries.</em></h2>
-        <p>화면의 “구매” 한 번을 원자적 저장, 중복 방지, 비동기 이벤트, 관측 가능한 상태로 분해했습니다.</p>
+        <p className="section-index mono">02 / 주문 처리</p>
+        <h2>주문 한 건이<br /><em>처리되는 과정.</em></h2>
+        <p>장바구니에서 주문한 뒤 데이터베이스에 저장되고 메시지로 전달되는 과정을 네 단계로 나눴습니다.</p>
       </div>
       <div className="architecture" aria-label="시스템 아키텍처">
         <div className="architecture__rail" aria-hidden="true"><span /><span /><span /></div>
@@ -236,10 +236,10 @@ function FailureLab() {
   return (
     <section className="failure section" id="about">
       <div className="failure__copy">
-        <p className="section-index mono">03 / FAILURE IS A FEATURE</p>
-        <h2>A dead end can still<br /><em>feel intentional.</em></h2>
-        <p>404를 감추지 않고 복구 흐름으로 설계했습니다. 원본 UFO 애니메이션은 SPA 라우팅과 키보드 접근성을 갖춘 시스템 상태 화면으로 진화했습니다.</p>
-        <button className="button button--light" onClick={() => navigate('/signal-lost')}>Open recovery page <span>↗</span></button>
+        <p className="section-index mono">03 / 404 화면</p>
+        <h2>없는 페이지에서도<br /><em>돌아갈 수 있게.</em></h2>
+        <p>404-error-page의 UFO 애니메이션을 그대로 살리고, 어떤 잘못된 주소에서도 메인 화면으로 돌아올 수 있도록 SPA 라우팅을 연결했습니다.</p>
+        <button className="button button--light" onClick={() => navigate('/signal-lost')}>404 화면 열기 <span>↗</span></button>
       </div>
       <div className="failure__preview" data-cursor>
         <div className="browser-bar"><i /><i /><i /><span className="mono">effect.ops/unknown-route</span></div>
@@ -253,9 +253,9 @@ function FailureLab() {
 function Footer() {
   return (
     <footer>
-      <div><span className="brand__mark">E/</span><h2>Built for the space<br />between UI and systems.</h2></div>
+      <div><span className="brand__mark">C/E</span><h2>김태영의 풀스택<br />포트폴리오 프로젝트.</h2></div>
       <div className="footer__links"><a href="https://github.com/taeyoungk-dev" target="_blank" rel="noreferrer">GitHub ↗</a><a href="https://www.linkedin.com/in/katiekim412" target="_blank" rel="noreferrer">LinkedIn ↗</a><a href="mailto:katiekim412@gmail.com">Email ↗</a></div>
-      <p className="mono">© 2026 KIM TAEYOUNG · SEOUL, KR</p>
+      <p className="mono">CUSTOM_EFFECT · 3 PROJECTS IN 1 · © 2026 KIM TAEYOUNG</p>
     </footer>
   )
 }
@@ -274,16 +274,16 @@ function CartDrawer({ items, onClose, onRemove, onCheckout, result, loading }: {
     <div className="drawer-shell" role="dialog" aria-modal="true" aria-label="장바구니">
       <button className="drawer-backdrop" onClick={onClose} aria-label="장바구니 닫기" />
       <aside className="drawer">
-        <div className="drawer__header"><div><p className="mono">ORDER / DRAFT</p><h2>Your objects</h2></div><button onClick={onClose} aria-label="닫기">×</button></div>
+        <div className="drawer__header"><div><p className="mono">ORDER / DRAFT</p><h2>장바구니</h2></div><button onClick={onClose} aria-label="닫기">×</button></div>
         {result ? (
           <div className="order-success"><span>✓</span><p className="mono">{isDemoOrder ? 'DEMO FLOW COMPLETE' : 'EVENT COMMITTED'}</p><h3>{isDemoOrder ? 'Simulation complete.' : 'Order accepted.'}</h3><p>{isDemoOrder ? 'API가 연결되지 않아 브라우저에서만 시뮬레이션했습니다. 전체 스택을 실행하면 실제 트랜잭션을 확인할 수 있습니다.' : '주문과 outbox 이벤트가 같은 트랜잭션으로 기록되었습니다.'}</p><dl><dt>ORDER ID</dt><dd>{result.orderId}</dd><dt>STATUS</dt><dd>{result.status}</dd><dt>TOTAL</dt><dd>{formatPrice(result.total)}</dd></dl><button className="button button--dark" onClick={onClose}>Continue exploring</button></div>
         ) : items.length === 0 ? (
-          <div className="drawer__empty"><span>◎</span><h3>No signal yet.</h3><p>컬렉션에서 오브젝트를 선택해 주문 흐름을 시작하세요.</p></div>
+          <div className="drawer__empty"><span>◎</span><h3>아직 비어 있습니다.</h3><p>상품 데모에서 포스터를 선택하면 주문 흐름을 확인할 수 있습니다.</p></div>
         ) : (
           <>
             <div className="drawer__items">{items.map((item) => <div className="cart-item" key={item.sku}><img src={item.image} alt="" /><div><p className="mono">{item.sku} · QTY {item.quantity}</p><h3>{item.name}</h3><strong>{formatPrice(item.price * item.quantity)}</strong></div><button onClick={() => onRemove(item.sku)} aria-label={`${item.name} 제거`}>×</button></div>)}</div>
-            <div className="drawer__total"><span>Estimated total</span><strong>{formatPrice(total)}</strong></div>
-            <button className="button button--dark drawer__checkout" onClick={onCheckout} disabled={loading}>{loading ? 'COMMITTING…' : 'COMMIT ORDER'} <span>→</span></button>
+            <div className="drawer__total"><span>주문 합계</span><strong>{formatPrice(total)}</strong></div>
+            <button className="button button--dark drawer__checkout" onClick={onCheckout} disabled={loading}>{loading ? '저장 중…' : '주문 저장'} <span>→</span></button>
             <p className="drawer__note mono">IDEMPOTENCY KEY · SERVER-SIDE TOTAL · OUTBOX EVENT</p>
           </>
         )}
@@ -295,10 +295,10 @@ function CartDrawer({ items, onClose, onRemove, onCheckout, result, loading }: {
 function NotFound() {
   return (
     <main className="not-found">
-      <header className="not-found__header"><button className="brand brand--light" onClick={() => navigate('/')}><span className="brand__mark">E/</span><span>EFFECT<sup>OPS</sup></span></button><span className="mono">RECOVERY MODE / ACTIVE</span></header>
-      <div className="not-found__copy"><p className="eyebrow eyebrow--light"><span />Signal interrupted</p><h1>You found the<br /><em>space between.</em></h1><p>요청한 경로는 존재하지 않지만 시스템은 정상입니다. 우주선이 경로를 복구하는 동안 안전하게 스토어로 돌아가세요.</p><button className="button button--acid" onClick={() => navigate('/')}>Return to signal <span>↙</span></button></div>
+      <header className="not-found__header"><button className="brand brand--light" onClick={() => navigate('/')}><span className="brand__mark">C/E</span><span>CUSTOM<sup>EFFECT</sup></span></button><span className="mono">404 / PAGE NOT FOUND</span></header>
+      <div className="not-found__copy"><p className="eyebrow eyebrow--light"><span />요청한 페이지 없음</p><h1>페이지를<br /><em>찾을 수</em><br />없습니다.</h1><p>주소가 바뀌었거나 삭제된 페이지입니다. 아래 버튼을 누르면 메인 화면으로 돌아갑니다.</p><button className="button button--acid" onClick={() => navigate('/')}>메인으로 돌아가기 <span>↙</span></button></div>
       <div className="not-found__art"><img src="/ufo.svg" alt="UFO 404 애니메이션" /></div>
-      <div className="not-found__meta mono"><span>ERROR / 404</span><span>TRACE ID / {crypto.randomUUID().slice(0, 8).toUpperCase()}</span><span>RECOVERABLE / TRUE</span></div>
+      <div className="not-found__meta mono"><span>ERROR / 404</span><span>PATH / {window.location.pathname}</span><span>HOME / AVAILABLE</span></div>
     </main>
   )
 }

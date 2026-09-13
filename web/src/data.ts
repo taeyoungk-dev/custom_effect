@@ -6,7 +6,7 @@ export const fallbackProducts: Product[] = [
     name: 'Signal No. 01',
     description: 'A modular light study for focused rooms.',
     price: 129,
-    accent: '#ff5b35',
+    accent: '#521714',
     image: '/assets/poster-signal.png',
   },
   {
@@ -14,7 +14,7 @@ export const fallbackProducts: Product[] = [
     name: 'Orbit No. 02',
     description: 'A kinetic print about systems in motion.',
     price: 96,
-    accent: '#8b6cff',
+    accent: '#1e4029',
     image: '/assets/poster-orbit.png',
   },
   {
@@ -22,7 +22,7 @@ export const fallbackProducts: Product[] = [
     name: 'Field No. 03',
     description: 'A chromatic field generated from live data.',
     price: 148,
-    accent: '#c7ff5e',
+    accent: '#5b4a87',
     image: '/assets/poster-field.png',
   },
 ]
@@ -35,4 +35,3 @@ export const fallbackStatus: PlatformStatus = {
     { name: 'Event pipeline', status: 'DEMO', detail: 'Transactional outbox' },
   ],
 }
-

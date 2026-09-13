@@ -8,12 +8,12 @@ afterEach(() => {
   window.history.replaceState({}, '', '/')
 })
 
-describe('EFFECT/OPS storefront', () => {
+describe('CUSTOM EFFECT storefront', () => {
   it('renders the value proposition after the intro was seen', async () => {
     sessionStorage.setItem('effect-ops-intro', 'seen')
     vi.spyOn(globalThis, 'fetch').mockRejectedValue(new Error('offline'))
     render(<App />)
-    expect(screen.getByText(/Design the/)).toBeInTheDocument()
+    expect(screen.getByText(/세 개의 프로젝트를/)).toBeInTheDocument()
     expect(await screen.findByText('Signal No. 01')).toBeInTheDocument()
   })
 
@@ -26,4 +26,3 @@ describe('EFFECT/OPS storefront', () => {
     expect(screen.getByText('ORDER / DRAFT')).toBeInTheDocument()
   })
 })
-
