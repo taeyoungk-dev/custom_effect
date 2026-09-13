@@ -17,6 +17,8 @@ describe('CUSTOM EFFECT storefront', () => {
     render(<App />)
     expect(screen.getByText(/상품을 고르는 순간부터/)).toBeInTheDocument()
     expect(await screen.findByText('Signal No. 01')).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: /Tech Blog/ })).toHaveAttribute('href', 'https://www.taeyoungkim.dev/ko')
+    expect(screen.getByRole('link', { name: /Email/ })).toHaveAttribute('href', 'mailto:taeyoungkdev@gmail.com')
   })
 
   it('keeps a catalog item in the cart after closing and reopening it', async () => {

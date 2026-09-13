@@ -280,7 +280,12 @@ function Footer() {
   return (
     <footer>
       <div><span className="brand__mark">C/E</span><h2>김태영의 풀스택<br />포트폴리오 프로젝트.</h2></div>
-      <div className="footer__links"><a href="https://github.com/taeyoungk-dev" target="_blank" rel="noreferrer">GitHub ↗</a><a href="https://www.linkedin.com/in/katiekim412" target="_blank" rel="noreferrer">LinkedIn ↗</a><a href="mailto:katiekim412@gmail.com">Email ↗</a></div>
+      <div className="footer__links">
+        <a href="https://github.com/taeyoungk-dev" target="_blank" rel="noreferrer">GitHub <span>@taeyoungk-dev ↗</span></a>
+        <a href="https://www.linkedin.com/in/taeyoung-kim-9b743140b/" target="_blank" rel="noreferrer">LinkedIn <span>taeyoung-kim-9b743140b ↗</span></a>
+        <a href="https://www.taeyoungkim.dev/ko" target="_blank" rel="noreferrer">Tech Blog <span>taeyoungkim.dev/ko ↗</span></a>
+        <a href="mailto:taeyoungkdev@gmail.com">Email <span>taeyoungkdev@gmail.com ↗</span></a>
+      </div>
       <p className="mono">CUSTOM_EFFECT · WEB / API / DATA / CLOUD · © 2026 KIM TAEYOUNG</p>
     </footer>
   )
