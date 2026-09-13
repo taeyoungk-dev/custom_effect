@@ -110,7 +110,7 @@ npm install
 npm run dev
 ```
 
-브라우저에서 [http://localhost:5173](http://localhost:5173)을 엽니다. API가 없으면 상단 카탈로그 배지가 `DEMO DATA`로 표시되고, 주문은 `demo-...` ID로 시뮬레이션됩니다. 시각·장바구니·404 흐름은 모두 동작합니다.
+브라우저에서 [http://localhost:4173](http://localhost:4173)을 엽니다. 다른 개발 서버로 잘못 연결되지 않도록 EFFECT/OPS 전용 개발 포트를 `4173`으로 고정하고, 이미 사용 중이면 자동으로 다른 포트로 이동하지 않고 오류를 표시하도록 설정했습니다. API가 없으면 상단 카탈로그 배지가 `DEMO DATA`로 표시되고, 주문은 `demo-...` ID로 시뮬레이션됩니다. 시각·장바구니·404 흐름은 모두 동작합니다.
 
 인트로를 다시 보려면 브라우저 개발자 도구의 Session Storage에서 `effect-ops-intro`를 지우거나 새 시크릿 창을 사용하세요.
 
@@ -264,4 +264,3 @@ kubectl apply -k infra/k8s
 [GitHub](https://github.com/taeyoungk-dev) · [LinkedIn](https://www.linkedin.com/in/katiekim412) · [Email](mailto:katiekim412@gmail.com)
 
 > 이 저장소의 별도 라이선스는 아직 지정하지 않았습니다. 외부 공개·재사용 정책을 정한 뒤 LICENSE를 추가할 예정입니다.
-
