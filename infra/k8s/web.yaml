@@ -25,7 +25,7 @@ spec:
           imagePullPolicy: IfNotPresent
           ports:
             - name: http
-              containerPort: 8080
+              containerPort: 8083
           readinessProbe:
             httpGet:
               path: /
@@ -61,4 +61,3 @@ spec:
     - name: http
       port: 80
       targetPort: http
-

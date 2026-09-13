@@ -10,6 +10,5 @@ RUN addgroup -S effectops && adduser -S effectops -G effectops
 WORKDIR /app
 COPY --from=build /workspace/target/effect-ops-api-1.0.0.jar app.jar
 USER effectops
-EXPOSE 8080
+EXPOSE 8083
 ENTRYPOINT ["java", "-XX:MaxRAMPercentage=75", "-jar", "app.jar"]
-

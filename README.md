@@ -113,8 +113,8 @@ docker compose up --build
 
 | 서비스 | 주소 |
 |---|---|
-| CUSTOM EFFECT 웹 | [http://localhost:8088](http://localhost:8088) |
-| API health | [http://localhost:8088/actuator/health](http://localhost:8088/actuator/health) |
+| CUSTOM EFFECT 웹 | [http://localhost:8083](http://localhost:8083) |
+| API health | [http://localhost:8083/actuator/health](http://localhost:8083/actuator/health) |
 | RabbitMQ 관리 UI | [http://localhost:15672](http://localhost:15672) |
 
 종료:
@@ -134,20 +134,20 @@ cd server
 mvn spring-boot:run
 ```
 
-기본 프로필은 인메모리 H2와 `MESSAGING_ENABLED=false`를 사용하므로 PostgreSQL·RabbitMQ 없이 시작됩니다. 프론트 개발 서버는 `/api`를 `localhost:8080`으로 프록시합니다.
+기본 프로필은 인메모리 H2와 `MESSAGING_ENABLED=false`를 사용하므로 PostgreSQL·RabbitMQ 없이 시작됩니다. API는 `http://localhost:8083`에서 시작하며, 프론트 개발 서버는 `/api`를 이 주소로 프록시합니다.
 
 ## API 사용 예시
 
 카탈로그:
 
 ```bash
-curl http://localhost:8080/api/products
+curl http://localhost:8083/api/products
 ```
 
 주문 생성:
 
 ```bash
-curl -i http://localhost:8080/api/orders \
+curl -i http://localhost:8083/api/orders \
   -X POST \
   -H 'Content-Type: application/json' \
   -H 'Idempotency-Key: portfolio-demo-001' \
