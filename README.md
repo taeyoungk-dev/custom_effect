@@ -259,7 +259,11 @@ kubectl apply -k infra/k8s
 
 ## Author
 
-**김태영 (Taeyoung Kim)**  
-[GitHub](https://github.com/taeyoungk-dev) · [LinkedIn](https://www.linkedin.com/in/katiekim412) · [Email](mailto:katiekim412@gmail.com)
+**김태영**
 
-> 이 저장소의 별도 라이선스는 아직 지정하지 않았습니다. 외부 공개·재사용 정책을 정한 뒤 LICENSE를 추가할 예정입니다.
+Backend · Cloud · Data Engineer in progress
+
+- GitHub: [@taeyoungk-dev](https://github.com/taeyoungk-dev)
+- LinkedIn: [linkedin.com/in/taeyoung-kim-9b743140b](https://www.linkedin.com/in/taeyoung-kim-9b743140b/)
+- Tech Blog: [taeyoungkim.dev/ko](https://www.taeyoungkim.dev/ko)
+- Email: [taeyoungkdev@gmail.com](mailto:taeyoungkdev@gmail.com)
