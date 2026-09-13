@@ -92,6 +92,8 @@ custom_effect/
 요구 사항: Node.js 22+, npm 10+
 
 ```bash
+# 먼저 저장소 최상위 폴더로 이동합니다.
+# 예: cd "/Volumes/D드라이브/Project/custom_effect"
 cd web
 npm install
 npm run dev
