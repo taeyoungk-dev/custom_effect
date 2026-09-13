@@ -1,26 +1,14 @@
 # CUSTOM EFFECT
 
-> `custom-cursor`, `404-error-page`, `aks-store` 세 프로젝트를 하나의 주문 흐름으로 통합한 김태영의 풀스택 포트폴리오 프로젝트입니다.
+> 몰입형 인터랙션부터 주문 저장, 메시지 발행, 장애 복구까지 하나의 사용자 흐름으로 구현한 김태영의 풀스택 포트폴리오 프로젝트입니다.
 
 [![CI](https://github.com/taeyoungk-dev/custom_effect/actions/workflows/ci.yml/badge.svg)](https://github.com/taeyoungk-dev/custom_effect/actions/workflows/ci.yml)
-
-## 프로젝트를 만든 이유
-
-기존 세 프로젝트는 각각 강점이 분명했습니다.
-
-| 원본 프로젝트 | 가져온 핵심 | CUSTOM EFFECT에서의 확장 |
-|---|---|---|
-| [`custom-cursor`](https://github.com/taeyoungk-dev/custom-cursor) | 커스텀 커서, 홀드 인터랙션, 패럴랙스, 포스터 아트 | `requestAnimationFrame` 기반 포인터 렌더링, 키보드 진입, reduced-motion 대응, 실제 상품 카탈로그 |
-| [`404-error-page`](https://github.com/taeyoungk-dev/404-error-page) | UFO SVG와 404 애니메이션 | SPA 라우팅, 복구 CTA, 추적 ID, 접근 가능한 오류 상태 화면 |
-| [`aks-store`](https://github.com/taeyoungk-dev/aks-store) | AKS의 스토어·주문·RabbitMQ 배포 모델 | Java 주문 API, PostgreSQL, Transactional Outbox, 보안 컨텍스트·probe·HPA·NetworkPolicy |
-
-통합 과정의 목표는 화면 세 개를 단순히 붙이는 것이 아니었습니다. **사용자가 보는 인터랙션부터 데이터 일관성, 메시지 전달, 컨테이너 운영까지 한 번의 주문 흐름을 끝까지 설명할 수 있는 시스템**으로 재설계했습니다.
 
 ## 핵심 경험
 
 - **Hold-to-enter 인트로** — 포인터와 키보드를 모두 지원하고 세션당 한 번만 표시됩니다.
 - **커스텀 커서·패럴랙스** — 미세 포인터에서만 활성화되며, 애니메이션은 브라우저 프레임에 맞춰 갱신됩니다.
-- **실제 카탈로그·장바구니** — API 연결 시 서버 데이터를 사용하고, 프론트만 실행해도 명시적인 Demo mode로 전체 UX를 확인할 수 있습니다.
+- **실제 카탈로그·장바구니** — API 연결 시 서버 데이터를 사용하고, 장바구니는 브라우저에 보존되어 새로고침 뒤에도 이어집니다. 프론트만 실행해도 명시적인 Demo mode로 전체 UX를 확인할 수 있습니다.
 - **멱등 주문 API** — `Idempotency-Key`로 네트워크 재시도 시 중복 주문을 방지합니다.
 - **서버 측 금액 계산** — 클라이언트가 보낸 가격을 신뢰하지 않고 SKU와 수량만 받아 DB 가격으로 합계를 다시 계산합니다.
 - **Transactional Outbox** — 주문과 발행할 이벤트를 같은 DB 트랜잭션에 저장하여 dual-write 유실 구간을 제거합니다.
@@ -84,7 +72,7 @@ sequenceDiagram
 ```text
 custom_effect/
 ├── web/                         # React + TypeScript storefront와 404 recovery UI
-│   ├── public/                  # 통합한 이미지·UFO SVG 자산
+│   ├── public/                  # 이미지·UFO SVG 자산
 │   └── src/                     # UI, API adapter, 테스트
 ├── server/                      # Java 21 Spring Boot 주문 서비스
 │   └── src/
@@ -251,7 +239,7 @@ kubectl apply -k infra/k8s
 
 ## 포트폴리오에서 설명할 수 있는 것
 
-- “세 개의 독립된 프론트/인프라 실습을 사용자 여정 중심의 풀스택 시스템으로 통합했습니다.”
+- “상품 탐색부터 주문 저장과 메시지 발행까지 사용자 여정 중심의 풀스택 시스템으로 설계했습니다.”
 - “멱등 키와 서버 측 재계산으로 재시도·클라이언트 변조 문제를 다뤘습니다.”
 - “주문과 이벤트 사이 dual-write 문제를 Transactional Outbox로 줄이고, 중복 전달은 consumer 멱등성으로 해결해야 함을 명시했습니다.”
 - “개발용 fallback, Docker Compose, Kubernetes까지 실행 환경을 단계화하고 CI에서 각 계약을 검증했습니다.”

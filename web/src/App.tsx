@@ -8,6 +8,32 @@ const formatPrice = (value: number) => new Intl.NumberFormat('en-US', {
   maximumFractionDigits: 0,
 }).format(value)
 
+const CART_STORAGE_KEY = 'custom-effect-cart'
+
+function readCart(): CartItem[] {
+  try {
+    const stored = JSON.parse(localStorage.getItem(CART_STORAGE_KEY) ?? '[]') as unknown
+    if (!Array.isArray(stored)) return []
+
+    return stored.filter((item): item is CartItem => {
+      if (!item || typeof item !== 'object') return false
+      const candidate = item as Partial<CartItem>
+      return typeof candidate.sku === 'string'
+        && typeof candidate.name === 'string'
+        && typeof candidate.description === 'string'
+        && typeof candidate.price === 'number'
+        && Number.isFinite(candidate.price)
+        && typeof candidate.accent === 'string'
+        && typeof candidate.image === 'string'
+        && typeof candidate.quantity === 'number'
+        && Number.isInteger(candidate.quantity)
+        && candidate.quantity > 0
+    })
+  } catch {
+    return []
+  }
+}
+
 function navigate(path: string) {
   window.history.pushState({}, '', path)
   window.dispatchEvent(new PopStateEvent('popstate'))
@@ -93,7 +119,7 @@ function Intro({ onComplete }: { onComplete: () => void }) {
     <div className="intro" role="dialog" aria-label="CUSTOM EFFECT 시작 화면">
       <span className="intro__index mono">CUSTOM_EFFECT / 2026</span>
       <div className="intro__center">
-        <p className="eyebrow eyebrow--light"><span />세 개의 프로젝트, 하나의 흐름</p>
+        <p className="eyebrow eyebrow--light"><span />인터랙션부터 주문 이벤트까지</p>
         <button
           className="launch-button"
           style={{ '--progress': `${progress * 3.6}deg` } as React.CSSProperties}
@@ -146,14 +172,14 @@ function Hero() {
     <main className="hero">
       <div className="hero__copy">
         <p className="eyebrow"><span />김태영 · FULL-STACK PORTFOLIO</p>
-        <h1>세 개의 프로젝트를<br /><em>하나의 흐름으로</em><br /><strong>다시 만들었습니다.</strong></h1>
-        <p className="hero__lede">커스텀 커서, UFO 404, AKS Store 실습을 합쳤습니다. 상품을 고르고 주문하면 Java API가 저장하고 RabbitMQ로 이벤트를 넘깁니다.</p>
+        <h1>상품을 고르는 순간부터<br /><em>주문 이벤트까지</em><br /><strong>직접 연결했습니다.</strong></h1>
+        <p className="hero__lede">화면의 작은 반응부터 주문 저장과 메시지 발행까지 하나의 흐름으로 설계했습니다. 상품을 고르면 Java API가 검증하고 RabbitMQ로 이벤트를 넘깁니다.</p>
         <div className="hero__actions">
           <a className="button button--dark" href="#collection">상품 데모 보기 <span>↘</span></a>
           <button className="text-link" onClick={() => navigate('/signal-lost')}>404 화면 보기 <span>↗</span></button>
         </div>
         <dl className="hero__metrics">
-          <div><dt>03</dt><dd>원본 프로젝트<br />통합</dd></div>
+          <div><dt>04</dt><dd>WEB · API<br />DB · MQ</dd></div>
           <div><dt>05</dt><dd>자동화 테스트<br />통과</dd></div>
           <div><dt>01</dt><dd>주문 이벤트<br />파이프라인</dd></div>
         </dl>
@@ -194,7 +220,7 @@ function Collection({ products, live, onAdd }: { products: Product[]; live: bool
         <div><p className="section-index mono">01 / 상품 데모</p><h2>포스터 이미지를<br /><em>상품 데이터로.</em></h2></div>
         <div className="section-heading__aside">
           <span className={`mode-badge ${live ? 'is-live' : ''}`}><i />{live ? 'LIVE API' : 'DEMO DATA'}</span>
-          <p>custom-cursor 프로젝트의 포스터 세 장을 상품 카탈로그로 구성했습니다. 주문 금액은 화면 값이 아니라 API가 데이터베이스 가격으로 다시 계산합니다.</p>
+          <p>포스터 세 장을 실제 상품 카탈로그처럼 탐색하고 장바구니에 담을 수 있습니다. 주문 금액은 화면 값을 신뢰하지 않고 API가 데이터베이스 가격으로 다시 계산합니다.</p>
         </div>
       </div>
       <div className="product-grid">
@@ -238,7 +264,7 @@ function FailureLab() {
       <div className="failure__copy">
         <p className="section-index mono">03 / 404 화면</p>
         <h2>없는 페이지에서도<br /><em>돌아갈 수 있게.</em></h2>
-        <p>404-error-page의 UFO 애니메이션을 그대로 살리고, 어떤 잘못된 주소에서도 메인 화면으로 돌아올 수 있도록 SPA 라우팅을 연결했습니다.</p>
+        <p>UFO 애니메이션을 오류 상태의 시각 언어로 사용하고, 어떤 잘못된 주소에서도 메인 화면으로 돌아올 수 있도록 SPA 라우팅을 연결했습니다.</p>
         <button className="button button--light" onClick={() => navigate('/signal-lost')}>404 화면 열기 <span>↗</span></button>
       </div>
       <div className="failure__preview" data-cursor>
@@ -255,7 +281,7 @@ function Footer() {
     <footer>
       <div><span className="brand__mark">C/E</span><h2>김태영의 풀스택<br />포트폴리오 프로젝트.</h2></div>
       <div className="footer__links"><a href="https://github.com/taeyoungk-dev" target="_blank" rel="noreferrer">GitHub ↗</a><a href="https://www.linkedin.com/in/katiekim412" target="_blank" rel="noreferrer">LinkedIn ↗</a><a href="mailto:katiekim412@gmail.com">Email ↗</a></div>
-      <p className="mono">CUSTOM_EFFECT · 3 PROJECTS IN 1 · © 2026 KIM TAEYOUNG</p>
+      <p className="mono">CUSTOM_EFFECT · WEB / API / DATA / CLOUD · © 2026 KIM TAEYOUNG</p>
     </footer>
   )
 }
@@ -309,7 +335,7 @@ export default function App() {
   const [products, setProducts] = useState<Product[]>([])
   const [live, setLive] = useState(false)
   const [status, setStatus] = useState<PlatformStatus | null>(null)
-  const [cart, setCart] = useState<CartItem[]>([])
+  const [cart, setCart] = useState<CartItem[]>(readCart)
   const [cartOpen, setCartOpen] = useState(false)
   const [orderResult, setOrderResult] = useState<OrderResponse | null>(null)
   const [ordering, setOrdering] = useState(false)
@@ -328,6 +354,10 @@ export default function App() {
   useEffect(() => {
     document.body.classList.toggle('has-modal', intro || cartOpen)
   }, [intro, cartOpen])
+
+  useEffect(() => {
+    localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart))
+  }, [cart])
 
   const addItem = (product: Product) => {
     setCart((current) => {
