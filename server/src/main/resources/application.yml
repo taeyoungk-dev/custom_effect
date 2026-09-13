@@ -1,0 +1,43 @@
+spring:
+  application:
+    name: effect-ops-api
+  datasource:
+    url: ${DATABASE_URL:jdbc:h2:mem:effectops;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;DEFAULT_NULL_ORDERING=HIGH}
+    username: ${DATABASE_USERNAME:sa}
+    password: ${DATABASE_PASSWORD:}
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+  flyway:
+    enabled: true
+  rabbitmq:
+    host: ${RABBITMQ_HOST:localhost}
+    port: ${RABBITMQ_PORT:5672}
+    username: ${RABBITMQ_USERNAME:guest}
+    password: ${RABBITMQ_PASSWORD:guest}
+
+server:
+  shutdown: graceful
+  error:
+    include-message: never
+
+management:
+  health:
+    rabbit:
+      enabled: ${MESSAGING_ENABLED:false}
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus
+  endpoint:
+    health:
+      probes:
+        enabled: true
+
+app:
+  cors:
+    allowed-origins: ${CORS_ALLOWED_ORIGINS:http://localhost:5173,http://localhost:8088}
+  messaging:
+    enabled: ${MESSAGING_ENABLED:false}
+    publish-interval-ms: 1000

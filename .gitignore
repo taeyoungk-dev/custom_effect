@@ -1,0 +1,21 @@
+.DS_Store
+.idea/
+.vscode/
+*.iml
+
+# Frontend
+web/node_modules/
+web/dist/
+web/coverage/
+*.tsbuildinfo
+web/vite.config.js
+web/vite.config.d.ts
+
+# Backend
+server/target/
+*.log
+
+# Local configuration
+.env
+.env.*
+!.env.example

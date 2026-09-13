@@ -1,0 +1,61 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-effectops}
+      POSTGRES_USER: ${POSTGRES_USER:-effectops}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-effectops-local}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+  rabbitmq:
+    image: rabbitmq:4-management-alpine
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER:-effectops}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS:-effectops-local}
+    ports:
+      - "15672:15672"
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+      interval: 8s
+      timeout: 5s
+      retries: 12
+
+  api:
+    build: ./server
+    environment:
+      DATABASE_URL: jdbc:postgresql://postgres:5432/${POSTGRES_DB:-effectops}
+      DATABASE_USERNAME: ${POSTGRES_USER:-effectops}
+      DATABASE_PASSWORD: ${POSTGRES_PASSWORD:-effectops-local}
+      RABBITMQ_HOST: rabbitmq
+      RABBITMQ_USERNAME: ${RABBITMQ_DEFAULT_USER:-effectops}
+      RABBITMQ_PASSWORD: ${RABBITMQ_DEFAULT_PASS:-effectops-local}
+      MESSAGING_ENABLED: "true"
+      CORS_ALLOWED_ORIGINS: http://localhost:8088
+    depends_on:
+      postgres:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:8080/actuator/health"]
+      interval: 8s
+      timeout: 4s
+      retries: 12
+
+  web:
+    build: ./web
+    ports:
+      - "8088:8080"
+    depends_on:
+      api:
+        condition: service_healthy
+
+volumes:
+  postgres-data:
+
